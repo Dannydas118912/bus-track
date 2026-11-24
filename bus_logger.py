@@ -13,7 +13,7 @@ ROUTES = [
 ]
 CSV_FILE = "bus_log.csv"
 RUN_MINUTES = 55       # 每次啟動跑 55 分鐘
-INTERVAL_SECONDS = 60  # 每 60 秒抓一次
+INTERVAL_SECONDS = 30  # 每 60 秒抓一次
 TW_TZ = timezone(timedelta(hours=8))
 
 def get_access_token():
