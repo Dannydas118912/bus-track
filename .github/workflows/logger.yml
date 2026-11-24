@@ -1,0 +1,39 @@
+name: Bus Data Logger
+
+on:
+  schedule:
+    # 台灣時間 06:00 ~ 23:00 每小時整點執行 (UTC 22-23 與 0-15)
+    - cron: '0 0-15,22-23 * * *'
+  workflow_dispatch: # 允許手動按下按鈕立刻測試
+
+permissions:
+  contents: write
+
+jobs:
+  log-bus:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下載專案檔案
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安裝套件
+        run: pip install requests
+
+      - name: 執行公車記錄器
+        env:
+          TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
+          TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
+        run: python bus_logger.py
+
+      - name: 存檔並推送回 GitHub
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add bus_log.csv
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update bus_log.csv"
+          git push
