@@ -3,7 +3,7 @@ name: Bus Data Logger
 on:
   schedule:
     # 台灣時間 06:00 ~ 23:00 每小時整點執行 (UTC 22-23 與 0-15)
-    - cron: '0 0-15,22-23 * * *'
+    - cron: '7 0-15,22-23 * * *'
   workflow_dispatch: # 允許手動按下按鈕立刻測試
 
 permissions:
