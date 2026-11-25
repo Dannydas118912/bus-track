@@ -12,7 +12,7 @@ ROUTES = [
     ("Taichung", "220")
 ]
 CSV_FILE = "bus_log.csv"
-RUN_MINUTES = 330       # 每次啟動跑 55 分鐘
+RUN_MINUTES = 330       # 每次啟動跑 五小時 三十 分鐘
 INTERVAL_SECONDS = 30  # 每 60 秒抓一次
 TW_TZ = timezone(timedelta(hours=8))
 
